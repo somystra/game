@@ -7,40 +7,29 @@
 * { margin:0; padding:0; box-sizing:border-box; }
 body { background:#000; overflow:hidden; font-family:'Segoe UI',sans-serif; }
 #c { display:block; width:100vw; height:100vh; }
-#crosshair {
-  position:fixed; top:50%; left:50%; transform:translate(-50%,-50%);
-  width:24px; height:24px; pointer-events:none;
-}
-#crosshair::before, #crosshair::after {
-  content:''; position:absolute; background:rgba(255,255,255,0.85);
-}
+#crosshair { position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); width:24px; height:24px; pointer-events:none; }
+#crosshair::before, #crosshair::after { content:''; position:absolute; background:rgba(255,255,255,0.85); }
 #crosshair::before { width:2px; height:100%; left:50%; transform:translateX(-50%); }
 #crosshair::after  { height:2px; width:100%; top:50%; transform:translateY(-50%); }
-#hud { position:fixed; bottom:0; left:0; right:0; display:flex; flex-direction:column; align-items:center; gap:6px; padding-bottom:14px; pointer-events:none; }
+#hud { position:fixed; bottom:0; left:0; right:0; display:flex; flex-direction:column; align-items:center; padding-bottom:14px; pointer-events:none; }
 #hotbar { display:flex; gap:4px; }
-.slot { width:52px; height:52px; border:2px solid rgba(255,255,255,0.3); border-radius:6px; background:rgba(0,0,0,0.55); display:flex; flex-direction:column; align-items:center; justify-content:center; font-size:10px; color:#fff; cursor:pointer; transition: border-color 0.1s; }
+.slot { width:52px; height:52px; border:2px solid rgba(255,255,255,0.3); border-radius:6px; background:rgba(0,0,0,0.55); display:flex; flex-direction:column; align-items:center; justify-content:center; color:#fff; cursor:pointer; transition:border-color 0.1s; }
 .slot.active { border-color:#fff; box-shadow:0 0 8px rgba(255,255,255,0.5); }
 .slot-icon { width:32px; height:32px; border-radius:3px; margin-bottom:2px; }
 .slot-label { font-size:9px; color:rgba(255,255,255,0.7); }
-#info { position:fixed; top:10px; left:10px; color:#fff; font-size:13px; background:rgba(0,0,0,0.55); padding:8px 12px; border-radius:8px; line-height:1.7; }
+#info { position:fixed; top:10px; left:10px; color:#fff; font-size:13px; background:rgba(0,0,0,0.55); padding:8px 12px; border-radius:8px; line-height:1.8; }
 #players-list { position:fixed; top:10px; right:10px; color:#fff; font-size:12px; background:rgba(0,0,0,0.55); padding:8px 12px; border-radius:8px; min-width:140px; }
 #players-list h4 { color:#00ffb4; margin-bottom:4px; font-size:11px; }
-#overlay { position:fixed; inset:0; background:rgba(0,0,0,0.92); display:flex; flex-direction:column; align-items:center; justify-content:center; color:#fff; z-index:100; gap:14px; }
+#overlay { position:fixed; inset:0; background:rgba(0,0,0,0.93); display:flex; flex-direction:column; align-items:center; justify-content:center; color:#fff; z-index:100; gap:14px; }
 #overlay h1 { font-size:36px; color:#5dfc5d; text-shadow:0 0 20px #5dfc5d; letter-spacing:2px; }
-#overlay p { color:#aaa; font-size:14px; }
-.menu-btn { padding:12px 36px; font-size:15px; border-radius:8px; border:none; cursor:pointer; font-family:'Segoe UI'; font-weight:600; transition:transform 0.1s; }
-.menu-btn:hover { transform:scale(1.04); }
+.menu-btn { padding:12px 36px; font-size:15px; border-radius:8px; border:none; cursor:pointer; font-family:'Segoe UI'; font-weight:600; }
+.menu-btn:hover { opacity:0.85; }
 #googleBtn { background:#4285f4; color:#fff; }
-#guestBtn  { background:#333; color:#ccc; border:1px solid #555; }
+#guestBtn  { background:#444; color:#ccc; border:1px solid #666; }
 #pause { position:fixed; inset:0; background:rgba(0,0,0,0.75); display:none; flex-direction:column; align-items:center; justify-content:center; color:#fff; z-index:99; gap:16px; }
-#pause h2 { font-size:28px; }
 #chat-box { position:fixed; bottom:80px; left:12px; width:280px; z-index:50; }
-#chat-messages { background:rgba(0,0,0,0.55); border-radius:6px; padding:6px 8px; max-height:140px; overflow-y:auto; font-size:12px; color:#fff; margin-bottom:4px; }
-#chat-messages p { margin-bottom:2px; }
-#chat-input { width:100%; background:rgba(0,0,0,0.7); border:1px solid rgba(255,255,255,0.3); color:#fff; padding:6px 10px; border-radius:6px; font-size:13px; display:none; outline:none; }
-#loading { position:fixed; inset:0; background:#111; display:flex; flex-direction:column; align-items:center; justify-content:center; color:#5dfc5d; font-size:18px; gap:12px; z-index:200; }
-#loading-bar-wrap { width:260px; height:8px; background:#333; border-radius:4px; }
-#loading-bar { height:100%; background:#5dfc5d; border-radius:4px; transition:width 0.3s; width:0%; }
+#chat-messages { background:rgba(0,0,0,0.6); border-radius:6px; padding:6px 8px; max-height:130px; overflow-y:auto; font-size:12px; color:#fff; margin-bottom:4px; }
+#chat-input { width:100%; background:rgba(0,0,0,0.75); border:1px solid rgba(255,255,255,0.3); color:#fff; padding:6px 10px; border-radius:6px; font-size:13px; display:none; outline:none; }
 </style>
 </head>
 <body>
@@ -49,34 +38,30 @@ body { background:#000; overflow:hidden; font-family:'Segoe UI',sans-serif; }
 <div id="hud"><div id="hotbar"></div></div>
 <div id="info">
   <div id="pos-info">X:0 Y:0 Z:0</div>
-  <div id="fps-info">FPS: 0</div>
+  <div id="fps-info">FPS: —</div>
   <div id="block-info">Blok: Grass</div>
-  <div style="color:#aaa;font-size:11px;margin-top:4px;">T=Chat | ESC=Pauza | 1-9=Blok</div>
+  <div style="color:#aaa;font-size:11px;">T=Chat | ESC=Pauza | 1-9=Blok</div>
 </div>
 <div id="players-list">
   <h4>👥 Online</h4>
-  <div id="player-names"></div>
+  <div id="player-names"><span style="color:#aaa">Yuklanmoqda...</span></div>
 </div>
 <div id="chat-box">
   <div id="chat-messages"></div>
-  <input id="chat-input" placeholder="Xabar... (Enter)" />
+  <input id="chat-input" placeholder="Xabar yozing... (Enter)" />
 </div>
 <div id="overlay">
   <h1>⛏ VoxelCraft</h1>
-  <p>Firebase multiplayer voxel o'yini</p>
-  <div id="nameDisplay" style="color:#5dfc5d;font-size:13px;"></div>
+  <p style="color:#aaa;">Firebase multiplayer voxel o'yini</p>
+  <div id="nameDisplay" style="color:#5dfc5d;font-size:13px;min-height:18px;"></div>
   <button class="menu-btn" id="googleBtn">🔑 Google bilan kirish</button>
-  <button class="menu-btn" id="guestBtn">👤 Mehmon sifatida</button>
+  <button class="menu-btn" id="guestBtn">👤 Mehmon sifatida o'ynash</button>
+  <div id="err-msg" style="color:#ff6b6b;font-size:12px;min-height:16px;"></div>
 </div>
 <div id="pause">
   <h2>⏸ Pauza</h2>
   <button class="menu-btn" style="background:#5dfc5d;color:#000;" id="resumeBtn">▶ Davom</button>
-  <button class="menu-btn" style="background:#e74c3c;color:#fff;" onclick="location.reload()">🚪 Chiqish</button>
-</div>
-<div id="loading">
-  <div>⛏ VoxelCraft yuklanmoqda...</div>
-  <div id="loading-bar-wrap"><div id="loading-bar"></div></div>
-  <div id="loading-text" style="font-size:13px;color:#aaa;">Tayyorlanmoqda...</div>
+  <button class="menu-btn" style="background:#e74c3c;color:#fff;margin-top:4px;" onclick="location.reload()">🚪 Chiqish</button>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -85,7 +70,8 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/fireba
 import { getAuth, signInWithPopup, signInAnonymously, GoogleAuthProvider, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 import { getDatabase, ref, set, get, onValue, remove, onDisconnect, serverTimestamp, push } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
-const fbConfig = {
+// ── Firebase init ──────────────────────────────────────────
+const fbApp = initializeApp({
   apiKey:"AIzaSyCpFL2AJO17gfjQa2TTcNqa-lAdEgqVxpw",
   authDomain:"mingbulak-ijara.firebaseapp.com",
   databaseURL:"https://mingbulak-ijara-default-rtdb.firebaseio.com",
@@ -93,73 +79,75 @@ const fbConfig = {
   storageBucket:"mingbulak-ijara.firebasestorage.app",
   messagingSenderId:"999036185534",
   appId:"1:999036185534:web:3d3ee2a80102d4fc85a7ef"
-};
-const fbApp = initializeApp(fbConfig);
-const auth  = getAuth(fbApp);
-const db    = getDatabase(fbApp);
+});
+const auth = getAuth(fbApp);
+const db   = getDatabase(fbApp);
 const gprov = new GoogleAuthProvider();
 
+// ── Block types ────────────────────────────────────────────
 const BLOCKS = {
-  1:{ name:'Grass',   color:0x4CAF50 },
-  2:{ name:'Dirt',    color:0x795548 },
-  3:{ name:'Stone',   color:0x9E9E9E },
-  4:{ name:'Wood',    color:0x8D6E63 },
-  5:{ name:'Leaves',  color:0x388E3C },
-  6:{ name:'Sand',    color:0xF9A825 },
-  7:{ name:'Water',   color:0x1565C0, transparent:true },
-  8:{ name:'Coal Ore',color:0x424242 },
-  9:{ name:'Iron Ore',color:0xBCAAA4 },
+  1:{name:'Grass',  color:0x4CAF50},
+  2:{name:'Dirt',   color:0x795548},
+  3:{name:'Stone',  color:0x9E9E9E},
+  4:{name:'Wood',   color:0x8D6E63},
+  5:{name:'Leaves', color:0x388E3C},
+  6:{name:'Sand',   color:0xF9A825},
+  7:{name:'Water',  color:0x1565C0, transparent:true},
+  8:{name:'Coal',   color:0x424242},
+  9:{name:'Iron',   color:0xBCAAA4},
 };
-const HOTBAR = [1,2,3,4,5,6,7,8,9];
+const HOTBAR=[1,2,3,4,5,6,7,8,9];
 
-// Three.js
-const canvas = document.getElementById('c');
-const renderer = new THREE.WebGLRenderer({ canvas, antialias:true });
-renderer.setSize(innerWidth, innerHeight);
-renderer.shadowMap.enabled = true;
-const scene  = new THREE.Scene();
-scene.background = new THREE.Color(0x87CEEB);
-scene.fog = new THREE.Fog(0x87CEEB, 40, 90);
-const camera = new THREE.PerspectiveCamera(75, innerWidth/innerHeight, 0.1, 200);
-camera.position.set(0, 22, 0);
+// ── Three.js ───────────────────────────────────────────────
+const canvas=document.getElementById('c');
+const renderer=new THREE.WebGLRenderer({canvas,antialias:true});
+renderer.setSize(innerWidth,innerHeight);
+renderer.shadowMap.enabled=true;
 
-const sun = new THREE.DirectionalLight(0xffffff, 1.4);
+const scene=new THREE.Scene();
+scene.background=new THREE.Color(0x87CEEB);
+scene.fog=new THREE.Fog(0x87CEEB,40,90);
+
+const camera=new THREE.PerspectiveCamera(75,innerWidth/innerHeight,0.1,200);
+camera.position.set(0,22,0);
+
+const sun=new THREE.DirectionalLight(0xffffff,1.4);
 sun.position.set(50,80,30); sun.castShadow=true;
 sun.shadow.mapSize.set(1024,1024);
+sun.shadow.camera.near=0.5; sun.shadow.camera.far=200;
 sun.shadow.camera.left=-60; sun.shadow.camera.right=60;
 sun.shadow.camera.top=60; sun.shadow.camera.bottom=-60;
-sun.shadow.camera.far=200;
 scene.add(sun);
-scene.add(new THREE.AmbientLight(0xaaccff, 0.8));
-scene.add(new THREE.HemisphereLight(0x87CEEB, 0x556B2F, 0.4));
+scene.add(new THREE.AmbientLight(0xaaccff,0.8));
+scene.add(new THREE.HemisphereLight(0x87CEEB,0x556B2F,0.4));
 
-const BOX_GEO = new THREE.BoxGeometry(1,1,1);
-const matCache = {};
-function getMat(color, transparent=false){
+const BOX=new THREE.BoxGeometry(1,1,1);
+const mats={};
+function mat(color,transparent=false){
   const k=color+'_'+transparent;
-  if(!matCache[k]) matCache[k]=new THREE.MeshLambertMaterial({color,transparent,opacity:transparent?0.65:1});
-  return matCache[k];
+  if(!mats[k]) mats[k]=new THREE.MeshLambertMaterial({color,transparent,opacity:transparent?0.65:1});
+  return mats[k];
 }
 
-const worldMeshes={}, worldData={};
+// ── World ──────────────────────────────────────────────────
+const meshes={}, data={};
 function bk(x,y,z){return `${Math.round(x)},${Math.round(y)},${Math.round(z)}`;}
 
 function addBlock(x,y,z,id,save=false){
   const k=bk(x,y,z);
-  if(worldMeshes[k]) return;
+  if(meshes[k]) return;
   const b=BLOCKS[id]; if(!b) return;
-  const m=new THREE.Mesh(BOX_GEO, getMat(b.color,!!b.transparent));
+  const m=new THREE.Mesh(BOX,mat(b.color,!!b.transparent));
   m.position.set(x,y,z); m.castShadow=!b.transparent; m.receiveShadow=true;
   m.userData={id,bx:x,by:y,bz:z};
-  scene.add(m); worldMeshes[k]=m; worldData[k]=id;
-  if(save) set(ref(db,`voxelcraft/world/${k}`),id);
+  scene.add(m); meshes[k]=m; data[k]=id;
+  if(save) set(ref(db,`vc/w/${k}`),id);
 }
-
 function removeBlock(x,y,z,save=false){
   const k=bk(x,y,z);
-  if(!worldMeshes[k]) return;
-  scene.remove(worldMeshes[k]); delete worldMeshes[k]; delete worldData[k];
-  if(save) remove(ref(db,`voxelcraft/world/${k}`));
+  if(!meshes[k]) return;
+  scene.remove(meshes[k]); delete meshes[k]; delete data[k];
+  if(save) remove(ref(db,`vc/w/${k}`));
 }
 
 function noise(x,z){
@@ -167,10 +155,8 @@ function noise(x,z){
         +Math.sin(x*0.17+0.5)*Math.cos(z*0.14+1.2)*1.5
         +Math.sin(x*0.03+3.1)*Math.cos(z*0.025+0.8)*5;
 }
-
 function generateWorld(){
-  const S=32;
-  for(let x=-S/2;x<S/2;x++) for(let z=-S/2;z<S/2;z++){
+  for(let x=-16;x<16;x++) for(let z=-16;z<16;z++){
     const h=Math.round(8+noise(x,z));
     for(let y=0;y<=h;y++){
       let id;
@@ -189,7 +175,8 @@ function generateWorld(){
   }
 }
 
-// Hotbar
+// ── Hotbar UI ──────────────────────────────────────────────
+let selectedSlot=0;
 HOTBAR.forEach((id,i)=>{
   const s=document.createElement('div');
   s.className='slot'+(i===0?' active':''); s.id='slot'+i;
@@ -197,96 +184,95 @@ HOTBAR.forEach((id,i)=>{
   s.onclick=()=>{selectedSlot=i;updateHotbar();};
   document.getElementById('hotbar').appendChild(s);
 });
-let selectedSlot=0;
 function updateHotbar(){
   HOTBAR.forEach((_,i)=>document.getElementById('slot'+i).className='slot'+(i===selectedSlot?' active':''));
   document.getElementById('block-info').textContent='Blok: '+BLOCKS[HOTBAR[selectedSlot]].name;
 }
 
-// Controls
+// ── Controls ───────────────────────────────────────────────
 const keys={};
 let chatOpen=false, paused=false, gameActive=false;
 document.addEventListener('keydown',e=>{
   keys[e.code]=true;
-  if(e.code==='KeyT'&&!chatOpen&&gameActive){e.preventDefault();openChat();}
-  if(e.code==='Escape'&&gameActive){if(chatOpen)closeChat();else togglePause();}
-  if(e.code==='Enter'&&chatOpen){e.preventDefault();sendChat();}
+  if(chatOpen){
+    if(e.code==='Enter'){e.preventDefault();sendChat();}
+    if(e.code==='Escape'){e.preventDefault();closeChat();}
+    return;
+  }
+  if(e.code==='KeyT'&&gameActive){e.preventDefault();openChat();}
+  if(e.code==='Escape'&&gameActive) togglePause();
   const n=parseInt(e.key);
-  if(!isNaN(n)&&n>=1&&n<=9&&!chatOpen){selectedSlot=n-1;updateHotbar();}
+  if(!isNaN(n)&&n>=1&&n<=9){selectedSlot=n-1;updateHotbar();}
 });
 document.addEventListener('keyup',e=>keys[e.code]=false);
+document.addEventListener('wheel',e=>{selectedSlot=(selectedSlot+(e.deltaY>0?1:-1)+9)%9;updateHotbar();},{ passive:true });
 
 let locked=false, yaw=0, pitch=0;
-canvas.addEventListener('click',()=>{if(gameActive&&!paused)canvas.requestPointerLock();});
+canvas.addEventListener('click',()=>{if(gameActive&&!paused&&!chatOpen) canvas.requestPointerLock();});
 document.addEventListener('pointerlockchange',()=>{locked=document.pointerLockElement===canvas;});
 document.addEventListener('mousemove',e=>{
   if(!locked||chatOpen) return;
   yaw-=e.movementX*0.002;
   pitch=Math.max(-1.55,Math.min(1.55,pitch-e.movementY*0.002));
 });
-document.addEventListener('wheel',e=>{selectedSlot=(selectedSlot+(e.deltaY>0?1:-1)+9)%9;updateHotbar();});
 
-const raycaster=new THREE.Raycaster(); raycaster.far=6;
+const ray=new THREE.Raycaster(); ray.far=6;
 document.addEventListener('mousedown',e=>{
-  if(!locked||chatOpen) return;
-  raycaster.setFromCamera(new THREE.Vector2(0,0),camera);
-  const hits=raycaster.intersectObjects(Object.values(worldMeshes));
+  if(!locked||chatOpen||paused) return;
+  ray.setFromCamera(new THREE.Vector2(0,0),camera);
+  const hits=ray.intersectObjects(Object.values(meshes));
   if(!hits.length) return;
   const {bx,by,bz}=hits[0].object.userData;
-  if(e.button===0){removeBlock(bx,by,bz,true);}
+  if(e.button===0){ removeBlock(bx,by,bz,true); }
   else if(e.button===2){
     const n=hits[0].face.normal;
     const nx=Math.round(bx+n.x),ny=Math.round(by+n.y),nz=Math.round(bz+n.z);
-    if(Math.abs(nx-px)<0.9&&Math.abs(ny-py)<1.5&&Math.abs(nz-pz)<0.9) return;
+    if(Math.abs(nx-px)<0.9&&Math.abs(ny-py)<1.6&&Math.abs(nz-pz)<0.9) return;
     addBlock(nx,ny,nz,HOTBAR[selectedSlot],true);
   }
 });
 canvas.addEventListener('contextmenu',e=>e.preventDefault());
 
-// Physics
+// ── Physics ────────────────────────────────────────────────
 let px=0,py=22,pz=0;
 const vel=new THREE.Vector3();
 let onGround=false;
-const GRAVITY=-28, JUMP=10, SPEED=6, PH=1.8;
-
-function isBlocked(x,y,z){const id=worldData[bk(Math.round(x),Math.round(y),Math.round(z))];return id&&id!==7;}
-
+function isBlocked(x,y,z){const id=data[bk(Math.round(x),Math.round(y),Math.round(z))];return id&&id!==7;}
 function physicsStep(dt){
   const dir=new THREE.Vector3(-Math.sin(yaw),0,-Math.cos(yaw));
   const right=new THREE.Vector3(-Math.cos(yaw),0,Math.sin(yaw));
-  const move=new THREE.Vector3();
-  if(keys['KeyW']||keys['ArrowUp']) move.add(dir);
-  if(keys['KeyS']||keys['ArrowDown']) move.sub(dir);
-  if(keys['KeyA']||keys['ArrowLeft']) move.sub(right);
-  if(keys['KeyD']||keys['ArrowRight']) move.add(right);
-  if(move.length()>0) move.normalize().multiplyScalar(SPEED);
-  vel.x=move.x; vel.z=move.z; vel.y+=GRAVITY*dt;
-  if(keys['Space']&&onGround){vel.y=JUMP;onGround=false;}
+  const mv=new THREE.Vector3();
+  if(keys['KeyW']||keys['ArrowUp']) mv.add(dir);
+  if(keys['KeyS']||keys['ArrowDown']) mv.sub(dir);
+  if(keys['KeyA']||keys['ArrowLeft']) mv.sub(right);
+  if(keys['KeyD']||keys['ArrowRight']) mv.add(right);
+  if(mv.length()>0) mv.normalize().multiplyScalar(6);
+  vel.x=mv.x; vel.z=mv.z; vel.y+=(-28)*dt;
+  if(keys['Space']&&onGround){vel.y=10;onGround=false;}
   px+=vel.x*dt;
   if(isBlocked(px,py,pz)||isBlocked(px,py-0.9,pz)){px-=vel.x*dt;vel.x=0;}
   pz+=vel.z*dt;
   if(isBlocked(px,py,pz)||isBlocked(px,py-0.9,pz)){pz-=vel.z*dt;vel.z=0;}
   py+=vel.y*dt; onGround=false;
-  if(vel.y<0&&isBlocked(px,py-PH,pz)){py=Math.round(py-PH)+PH+0.01;vel.y=0;onGround=true;}
+  if(vel.y<0&&isBlocked(px,py-1.8,pz)){py=Math.round(py-1.8)+1.81;vel.y=0;onGround=true;}
   if(vel.y>0&&isBlocked(px,py,pz)){vel.y=0;}
   camera.position.set(px,py,pz);
   camera.rotation.order='YXZ'; camera.rotation.y=yaw; camera.rotation.x=pitch;
   document.getElementById('pos-info').textContent=`X:${Math.round(px)} Y:${Math.round(py)} Z:${Math.round(pz)}`;
 }
 
-// Multiplayer
-let uid='',displayName='',presenceRef;
+// ── Multiplayer ────────────────────────────────────────────
+let uid='',displayName='',presRef;
 const others={};
-const PSYNC=200; let lastSync=0;
-
-function initMultiplayer(){
-  presenceRef=ref(db,`voxelcraft/players/${uid}`);
-  set(presenceRef,{name:displayName,x:px,y:py,z:pz,yaw:0,ts:serverTimestamp()});
-  onDisconnect(presenceRef).remove();
-  onValue(ref(db,'voxelcraft/players'),snap=>{
-    const data=snap.val()||{};
-    Object.keys(others).forEach(id=>{if(!data[id]||id===uid){if(others[id])scene.remove(others[id].mesh);delete others[id];}});
-    Object.entries(data).forEach(([id,p])=>{
+let lastSync=0;
+function initMP(){
+  presRef=ref(db,`vc/p/${uid}`);
+  set(presRef,{n:displayName,x:0,y:22,z:0,ts:serverTimestamp()});
+  onDisconnect(presRef).remove();
+  onValue(ref(db,'vc/p'),snap=>{
+    const d=snap.val()||{};
+    Object.keys(others).forEach(id=>{if(!d[id]||id===uid){scene.remove(others[id]);delete others[id];}});
+    Object.entries(d).forEach(([id,p])=>{
       if(id===uid) return;
       if(!others[id]){
         const g=new THREE.Group();
@@ -294,108 +280,130 @@ function initMultiplayer(){
         g.add(body);
         const head=new THREE.Mesh(new THREE.BoxGeometry(0.5,0.5,0.5),new THREE.MeshLambertMaterial({color:0xf1c40f}));
         head.position.y=0.7; g.add(head);
-        [-0.15,0.15].forEach(ox=>{const leg=new THREE.Mesh(new THREE.BoxGeometry(0.25,0.7,0.25),new THREE.MeshLambertMaterial({color:0x2c3e50}));leg.position.set(ox,-0.8,0);g.add(leg);});
-        g.position.set(p.x||0,(p.y||20)-0.9,p.z||0);
-        scene.add(g); others[id]={mesh:g,name:p.name};
-      } else {
-        others[id].mesh.position.set(p.x||0,(p.y||20)-0.9,p.z||0);
-        others[id].mesh.rotation.y=p.yaw||0;
+        [-0.15,0.15].forEach(ox=>{
+          const leg=new THREE.Mesh(new THREE.BoxGeometry(0.25,0.7,0.25),new THREE.MeshLambertMaterial({color:0x2c3e50}));
+          leg.position.set(ox,-0.8,0); g.add(leg);
+        });
+        scene.add(g); others[id]=g;
       }
+      others[id].position.set(p.x||0,(p.y||20)-0.9,p.z||0);
+      if(p.yaw) others[id].rotation.y=p.yaw;
     });
-    const names=Object.values(data).map(p=>`• ${p.name||'Mehmon'}`).join('<br>');
-    document.getElementById('player-names').innerHTML=names||'<span style="color:#aaa">Hech kim yo\'q</span>';
+    const names=Object.values(d).map(p=>`• ${p.n||'Mehmon'}`).join('<br>');
+    document.getElementById('player-names').innerHTML=names||'<span style="color:#aaa">Siz yolg\'izsiz</span>';
   });
 }
-
 function syncPos(){
-  if(!presenceRef) return;
-  set(presenceRef,{name:displayName,x:+px.toFixed(2),y:+py.toFixed(2),z:+pz.toFixed(2),yaw:+yaw.toFixed(3),ts:serverTimestamp()});
+  if(!presRef) return;
+  set(presRef,{n:displayName,x:+px.toFixed(1),y:+py.toFixed(1),z:+pz.toFixed(1),yaw:+yaw.toFixed(2),ts:serverTimestamp()});
 }
 
-// Chat
+// ── Chat ───────────────────────────────────────────────────
 function openChat(){chatOpen=true;const ci=document.getElementById('chat-input');ci.style.display='block';ci.focus();document.exitPointerLock();}
 function closeChat(){chatOpen=false;const ci=document.getElementById('chat-input');ci.style.display='none';ci.value='';}
-function sendChat(){const msg=document.getElementById('chat-input').value.trim();if(!msg){closeChat();return;}push(ref(db,'voxelcraft/chat'),{name:displayName,msg,ts:Date.now()});closeChat();}
-onValue(ref(db,'voxelcraft/chat'),snap=>{
-  const data=snap.val()||{};
-  const msgs=Object.values(data).sort((a,b)=>a.ts-b.ts).slice(-30);
+function sendChat(){
+  const msg=document.getElementById('chat-input').value.trim();
+  if(msg) push(ref(db,'vc/chat'),{n:displayName,m:msg,t:Date.now()});
+  closeChat();
+}
+onValue(ref(db,'vc/chat'),snap=>{
+  const d=snap.val()||{};
+  const msgs=Object.values(d).sort((a,b)=>a.t-b.t).slice(-30);
   const el=document.getElementById('chat-messages');
-  el.innerHTML=msgs.map(m=>`<p><b style="color:#5dfc5d">${m.name}:</b> ${m.msg}</p>`).join('');
+  el.innerHTML=msgs.map(m=>`<p><b style="color:#5dfc5d">${m.n}:</b> ${m.m}</p>`).join('');
   el.scrollTop=el.scrollHeight;
 });
 
-// Pause
-function togglePause(){paused=!paused;document.getElementById('pause').style.display=paused?'flex':'none';if(!paused)canvas.requestPointerLock();}
+// ── Pause ──────────────────────────────────────────────────
+function togglePause(){
+  paused=!paused;
+  document.getElementById('pause').style.display=paused?'flex':'none';
+  if(!paused) canvas.requestPointerLock();
+}
 document.getElementById('resumeBtn').onclick=()=>{paused=false;document.getElementById('pause').style.display='none';canvas.requestPointerLock();};
 
-// World load
-function setLoad(pct,msg){document.getElementById('loading-bar').style.width=pct+'%';document.getElementById('loading-text').textContent=msg;}
-
+// ── World load ─────────────────────────────────────────────
 function loadWorld(cb){
-  setLoad(40,'Firebase dunyo yuklanmoqda...');
-  get(ref(db,'voxelcraft/world')).then(snap=>{
-    const data=snap.val();
-    if(data&&Object.keys(data).length>100){
-      setLoad(70,'Bloklar joylashtirilmoqda...');
-      Object.entries(data).forEach(([k,id])=>{const [x,y,z]=k.split(',').map(Number);addBlock(x,y,z,id);});
-      setLoad(100,'Tayyor!'); setTimeout(cb,300);
+  get(ref(db,'vc/w')).then(snap=>{
+    const d=snap.val();
+    if(d&&Object.keys(d).length>50){
+      Object.entries(d).forEach(([k,id])=>{const[x,y,z]=k.split(',').map(Number);addBlock(x,y,z,id);});
     } else {
-      setLoad(60,'Yangi dunyo yaratilmoqda...');
       generateWorld();
-      setLoad(85,'Saqlanmoqda...');
-      const wo={};Object.entries(worldData).forEach(([k,id])=>wo[k]=id);
-      set(ref(db,'voxelcraft/world'),wo).then(()=>{setLoad(100,'Tayyor!');setTimeout(cb,300);}).catch(()=>{setLoad(100,'Offline');setTimeout(cb,300);});
+      const wo={};Object.entries(data).forEach(([k,id])=>wo[k]=id);
+      set(ref(db,'vc/w'),wo).catch(()=>{});
     }
-  }).catch(()=>{generateWorld();setLoad(100,'Offline rejim');setTimeout(cb,300);});
+    cb();
+  }).catch(()=>{
+    generateWorld();
+    cb();
+  });
 }
-
 function watchWorld(){
-  onValue(ref(db,'voxelcraft/world'),snap=>{
-    const data=snap.val()||{};
-    Object.keys(worldData).forEach(k=>{if(!data[k]){const[x,y,z]=k.split(',').map(Number);removeBlock(x,y,z,false);}});
-    Object.entries(data).forEach(([k,id])=>{if(!worldData[k]){const[x,y,z]=k.split(',').map(Number);addBlock(x,y,z,id,false);}});
+  onValue(ref(db,'vc/w'),snap=>{
+    const d=snap.val()||{};
+    Object.keys(data).forEach(k=>{if(!d[k]){const[x,y,z]=k.split(',').map(Number);removeBlock(x,y,z,false);}});
+    Object.entries(d).forEach(([k,id])=>{if(!data[k]){const[x,y,z]=k.split(',').map(Number);addBlock(x,y,z,id,false);}});
   });
 }
 
-// Game loop
+// ── Game loop ──────────────────────────────────────────────
 const clock=new THREE.Clock();
-let lastFps=0,fc=0,fps=0;
-function gameLoop(){
-  requestAnimationFrame(gameLoop);
+let lastFps=0,fc=0;
+function loop(){
+  requestAnimationFrame(loop);
   if(!gameActive||paused) return;
   const dt=Math.min(clock.getDelta(),0.05);
   physicsStep(dt);
   const now=Date.now();
-  if(now-lastSync>PSYNC){syncPos();lastSync=now;}
+  if(now-lastSync>200){syncPos();lastSync=now;}
   fc++;
-  if(now-lastFps>1000){fps=fc;fc=0;lastFps=now;document.getElementById('fps-info').textContent='FPS:'+fps;}
+  if(now-lastFps>1000){document.getElementById('fps-info').textContent='FPS:'+fc;fc=0;lastFps=now;}
   renderer.render(scene,camera);
 }
 
+// ── Start ──────────────────────────────────────────────────
 function startGame(u,name){
   uid=u; displayName=name;
   document.getElementById('overlay').style.display='none';
-  document.getElementById('loading').style.display='flex';
-  setLoad(10,'Ulanmoqda...');
+  // Show simple loading text in page
+  const loadDiv=document.createElement('div');
+  loadDiv.id='loadDiv';
+  loadDiv.style.cssText='position:fixed;inset:0;background:#111;display:flex;align-items:center;justify-content:center;color:#5dfc5d;font-size:20px;z-index:200;flex-direction:column;gap:12px;';
+  loadDiv.innerHTML='<div>⛏ Dunyo yaratilmoqda...</div><div style="color:#aaa;font-size:13px;">Iltimos kuting...</div>';
+  document.body.appendChild(loadDiv);
+
   loadWorld(()=>{
-    document.getElementById('loading').style.display='none';
-    initMultiplayer(); watchWorld();
-    gameActive=true; clock.start(); gameLoop();
+    loadDiv.remove();
+    initMP();
+    watchWorld();
+    gameActive=true;
+    clock.start();
+    loop();
     setTimeout(()=>canvas.requestPointerLock(),300);
   });
 }
 
 document.getElementById('googleBtn').onclick=()=>{
-  signInWithPopup(auth,gprov).then(r=>startGame(r.user.uid,r.user.displayName||'Player')).catch(e=>alert('Xato: '+e.message));
+  document.getElementById('err-msg').textContent='';
+  signInWithPopup(auth,gprov)
+    .then(r=>startGame(r.user.uid, r.user.displayName||'Player'))
+    .catch(e=>{document.getElementById('err-msg').textContent='Xato: '+e.message;});
 };
 document.getElementById('guestBtn').onclick=()=>{
-  signInAnonymously(auth).then(r=>startGame(r.user.uid,'Mehmon_'+Math.floor(Math.random()*9000+1000)));
+  signInAnonymously(auth)
+    .then(r=>startGame(r.user.uid,'Mehmon_'+Math.floor(Math.random()*9000+1000)))
+    .catch(e=>{document.getElementById('err-msg').textContent='Xato: '+e.message;});
 };
 onAuthStateChanged(auth,user=>{
-  if(user) document.getElementById('nameDisplay').textContent='Salom, '+(user.displayName||'O\'yinchi')+'!';
+  if(user&&user.displayName) document.getElementById('nameDisplay').textContent='Salom, '+user.displayName+'!';
 });
 
-window.addEventListener('resize',()=>{renderer.setSize(innerWidth,innerHeight);camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();});
+window.addEventListener('resize',()=>{
+  renderer.setSize(innerWidth,innerHeight);
+  camera.aspect=innerWidth/innerHeight;
+  camera.updateProjectionMatrix();
+});
 </script>
 </body>
 </html>
